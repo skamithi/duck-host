@@ -1,0 +1,23 @@
+graph G {
+  spine1:swp1 -- leaf1:swp49;
+  spine1:swp2 -- leaf2:swp49;
+  spine1:swp3 -- leaf3:swp49;
+  spine1:swp4 -- leaf4:swp49;
+  spine1:swp5 -- leaf5:swp49;
+  spine1:swp6 -- leaf6:swp49;
+
+  leaf1:swp1 -- server1:eth1;
+  leaf1:swp2 -- server2:eth1;
+
+  leaf2:swp1 -- server1:eth2;
+  leaf2:swp2 -- server2:eth2;
+
+  leaf3:swp1 -- server3:eth1;
+  leaf3:swp2 -- server4:eth1;
+
+  leaf4:swp1 -- server3:eth2;
+  leaf4:swp2 -- server4:eth2;
+
+  leaf5:swp50 -- ext_rtr:eth1;
+  leaf6:swp50 -- ext_rtr:eth2;
+};
