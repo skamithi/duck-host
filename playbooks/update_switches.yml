@@ -1,0 +1,78 @@
+---
+- hosts: all
+  sudo: True
+  tasks:
+    - name: copy ssh key to root account
+      authorized_key: user=root key="{{ lookup('file', './deploy_key_id_rsa.pub') }}"
+
+    - name: add updated renaming script to Vm
+      copy: src=rename_eth_swp.new dest=/etc/init.d/rename_eth_swp mode=755
+
+    - name: copy appropriate ethernet remap
+      copy: src="mapping/{{inventory_hostname}}" dest=/etc/default/eth_remap
+      register: eth_remap
+      notify: reboot switch vm
+
+    - name: capture hostname into another variable
+      debug: msg={{ inventory_hostname }}
+      register: sw_hostname
+
+    - name: copy fake license
+      copy: src=switch/cl-license dest=/usr/bin/cl-license mode=755 owner=root
+
+    - name: copy fake ports.conf
+      copy: src=switch/ports.conf dest=/etc/cumulus/ports.conf
+
+    - name: copy fake switchd
+      copy:  src=switch/switchd dest=/usr/sbin/switchd mode=755 owner=root
+
+    - name: copy fake switchd.conf
+      copy: src=switch/switchd.conf dest=/etc/cumulus/switchd.conf mode=644 owner=root
+
+    - name: copy fake switchd init script
+      copy:  src=switch/switchd_init dest=/etc/init.d/switchd mode=755 owner=root
+
+    - name: create cumulus bin directory
+      file: path=/usr/cumulus/bin state=directory
+
+    - name: add fake cl-license
+      copy: src=switch/cl-license dest=/usr/cumulus/bin/cl-license mode=755 owner=root
+
+    - name: add debian repository
+      apt_repository: repo="deb [arch=amd64] http://http.debian.net/debian wheezy  main contrib non-free" update_cache=yes
+
+
+  handlers:
+    - name: reboot switch vm
+      command: reboot
+
+
+- hosts: all
+  connection: local
+  gather_facts: false
+  tasks:
+      - name: get directory name where ansible was executed. this matches prefix of VM
+        shell: "pwd | awk 'BEGIN { FS=\"/\" } {print $(NF-1)}'"
+        register: vm_prefix
+
+      - name: wait for vm to come back online
+        local_action: wait_for port=22 host="{{ ansible_ssh_host }}" delay=10
+        when: eth_remap.changed == True
+
+      - name: check if hostname is copied
+        debug: msg="{{ sw_hostname.msg }}"
+
+      - name: get the mac address of the first interface
+        shell: "virsh domiflist {{ vm_prefix.stdout_lines[0]}}_{{ sw_hostname.msg }}  | awk '/vagrant-libvirt/ {print $5}'"
+        register: virsh_output
+
+      - name: remove first interface
+        shell: "virsh detach-interface --domain {{ vm_prefix.stdout_lines[0] }}_{{ sw_hostname.msg }} --type network --mac {{ virsh_output.stdout }} --config"
+
+      - name: shutdown vm
+        shell:  "virsh destroy {{ vm_prefix.stdout_lines[0]}}_{{ sw_hostname.msg }}"
+
+      - name: bring back up vm
+        shell: "virsh start  {{ vm_prefix.stdout_lines[0]}}_{{ sw_hostname.msg }}"
+
+
