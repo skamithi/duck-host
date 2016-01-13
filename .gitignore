@@ -1,2 +1,4 @@
 .vagrant
 *.pub
+*.swp
+Session.vim

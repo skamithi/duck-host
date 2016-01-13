@@ -2,14 +2,14 @@
 # vi: set ft=ruby :
 
 switch_box = 'cumulus-vx-2.5.5'
-
-switch_memory = '512'
-server_memory = '4096'
-ext_rtr_memory = '256'
 server_box = 'centos7'
 wbenchvm_box = 'trusty64'
-wbenchvm_memory = 4096
 ext_rtr_box = 'trusty64'
+
+wbenchvm_memory = 4096
+switch_memory = 512
+server_memory = 4096
+ext_rtr_memory = 256
 
 wbench_hostlist = [:ext_rtr, :spine1, :leaf1, :leaf2,
                   :leaf3, :leaf4, :leaf5, :leaf6,
@@ -41,6 +41,7 @@ Vagrant.configure("2") do |config|
         domain.memory = wbenchvm_memory
       end
       node.vm.box = wbenchvm_box
+      node.vm.hostname = 'openstack-mgmtvm'
       # disabling sync folder support on all VMs
       node.vm.synced_folder '.', '/vagrant', :disabled => true
 
@@ -61,11 +62,11 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "ext_rtr" do |ext_rtr|
-      ext_rtr.vm.hostname = "ext_rtr"
+      ext_rtr.vm.hostname = "extrtr"
       ext_rtr.vm.box = ext_rtr_box
 
       # eth0 (after deleting vagrant interface)
-      node.vm.network :private_network,
+      ext_rtr.vm.network :private_network,
         :auto_config => false,
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
