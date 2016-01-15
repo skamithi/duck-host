@@ -40,9 +40,9 @@
      inkscape:window-height="1355"
      id="namedview173"
      showgrid="false"
-     inkscape:zoom="1.8990293"
-     inkscape:cx="477.52571"
-     inkscape:cy="416.66857"
+     inkscape:zoom="3.7980586"
+     inkscape:cx="616.57143"
+     inkscape:cy="485.65118"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -155,24 +155,6 @@
      data-length="223.45021816950637"
      id="line30"
      style="stroke:#000000;stroke-width:1" />
-  <line
-     class="link"
-     x1="497"
-     x2="438"
-     y1="288"
-     y2="191"
-     data-length="113.53413583587978"
-     id="line32"
-     style="stroke:#000000;stroke-width:1" />
-  <line
-     class="link"
-     x1="595.72607"
-     x2="619.03162"
-     y1="288.27396"
-     y2="187.03996"
-     data-length="153.52524222420234"
-     id="line34"
-     style="stroke:#000000;stroke-width:0.45209903" />
   <g
      class="node"
      transform="translate(228,113)"
@@ -257,42 +239,6 @@
      class="node"
      transform="translate(468.84816,69.820045)"
      id="g54">
-    <rect
-       x="-70.691208"
-       y="40.547031"
-       width="114"
-       height="78"
-       id="rect56"
-       style="fill:none;stroke:#000000;stroke-width:2" />
-    <text
-       class="devicename"
-       y="85.96891"
-       x="-13.691205"
-       font-size="12px"
-       id="text58"
-       style="font-size:12px;text-anchor:middle;fill:#000000">ext_rtr1</text>
-    <circle
-       cx="-19"
-       cy="78"
-       r="2"
-       id="circle60"
-       d="m -17,78 c 0,1.104569 -0.895431,2 -2,2 -1.104569,0 -2,-0.895431 -2,-2 0,-1.104569 0.895431,-2 2,-2 1.104569,0 2,0.895431 2,2 z"
-       sodipodi:cx="-19"
-       sodipodi:cy="78"
-       sodipodi:rx="2"
-       sodipodi:ry="2"
-       transform="translate(-13.691205,40.547031)" />
-    <circle
-       cx="19"
-       cy="78"
-       r="2"
-       id="circle62"
-       d="m 21,78 c 0,1.104569 -0.895431,2 -2,2 -1.104569,0 -2,-0.895431 -2,-2 0,-1.104569 0.895431,-2 2,-2 1.104569,0 2,0.895431 2,2 z"
-       sodipodi:cx="19"
-       sodipodi:cy="78"
-       sodipodi:rx="2"
-       sodipodi:ry="2"
-       transform="translate(-13.691205,40.547031)" />
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
@@ -315,28 +261,6 @@
          id="tspan4810"
          x="130.93193"
          y="213.51691">203.1.1.2/31</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-       x="-6.2434134"
-       y="130.3165"
-       id="text4812"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4814"
-         x="-6.2434134"
-         y="130.3165">203.1.1.0/31</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-       x="173.84863"
-       y="129.00005"
-       id="text4816"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4818"
-         x="173.84863"
-         y="129.00005">203.1.1.3/31</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.94610375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 7.289211,269.05484 c 7.40014,6.10444 14.27169,-1.87829 14.27169,-1.87829 l 0,16.90461 -14.27169,0 z"
@@ -345,47 +269,25 @@
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-       x="-22.239296"
-       y="2.8661654"
+       x="-1.7024881"
+       y="152.41626"
        id="text4812-0"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4814-2"
-         x="-22.239296"
-         y="2.8661654">203.1.2.1/31</tspan></text>
+         x="-1.7024881"
+         y="152.41626">203.1.1.0/31</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-       x="-13.037688"
-       y="-45.336941"
-       id="text4812-4"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4814-8"
-         x="-13.037688"
-         y="-45.336941">203.1.2.0/31</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-       x="112.81718"
-       y="-46.453995"
-       id="text4812-1"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4814-5"
-         x="112.81718"
-         y="-46.453995">203.1.2.2/31</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-       x="103.15208"
-       y="2.1292119"
+       x="123.68888"
+       y="151.67931"
        id="text4812-5"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4814-82"
-         x="103.15208"
-         y="2.1292119">203.1.2.3/31</tspan></text>
+         x="123.68888"
+         y="151.67931">203.1.1.3/31</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
@@ -928,25 +830,6 @@
        x="240.38597"
        y="201.45302"
        style="fill:#1f0000;fill-opacity:1">swp4</tspan></text>
-  <rect
-     style="fill:#eafff3;fill-opacity:1;stroke:none"
-     id="rect3940-03-30"
-     width="16.324129"
-     height="9.4785271"
-     x="444.70087"
-     y="191.97449" />
-  <text
-     xml:space="preserve"
-     style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#1f0000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-     x="446.80722"
-     y="199.34668"
-     id="text3158-6-89"
-     sodipodi:linespacing="125%"><tspan
-       sodipodi:role="line"
-       id="tspan3160-42-2"
-       x="446.80722"
-       y="199.34668"
-       style="fill:#1f0000;fill-opacity:1">eth1</tspan></text>
   <rect
      style="fill:#eafff3;fill-opacity:1;stroke:none"
      id="rect3940-03-2"
@@ -1533,65 +1416,6 @@
        x="456.28577"
        y="500.02661"
        style="fill:#1f0000;fill-opacity:1">eth4</tspan></text>
-  <g
-     class="node"
-     transform="translate(599.78011,108.76795)"
-     id="g54-0">
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:2"
-       x="-57"
-       y="0"
-       width="114"
-       height="78"
-       id="rect56-4" />
-    <text
-       style="font-size:12px;text-anchor:middle;fill:#000000"
-       class="devicename"
-       y="0"
-       x="0"
-       font-size="12px"
-       transform="translate(0,45.421879)"
-       id="text58-1">ext_rtr2</text>
-    <circle
-       sodipodi:ry="2"
-       sodipodi:rx="2"
-       sodipodi:cy="78"
-       sodipodi:cx="-19"
-       cx="-19"
-       cy="78"
-       r="2"
-       id="circle60-9"
-       d="m -17,78 c 0,1.104569 -0.895431,2 -2,2 -1.104569,0 -2,-0.895431 -2,-2 0,-1.104569 0.895431,-2 2,-2 1.104569,0 2,0.895431 2,2 z" />
-    <circle
-       sodipodi:ry="2"
-       sodipodi:rx="2"
-       sodipodi:cy="78"
-       sodipodi:cx="19"
-       cx="19"
-       cy="78"
-       r="2"
-       id="circle62-5"
-       d="m 21,78 c 0,1.104569 -0.895431,2 -2,2 -1.104569,0 -2,-0.895431 -2,-2 0,-1.104569 0.895431,-2 2,-2 1.104569,0 2,0.895431 2,2 z" />
-  </g>
-  <rect
-     style="fill:#eafff3;fill-opacity:1;stroke:none"
-     id="rect3940-03-2-57"
-     width="16.324129"
-     height="9.4785271"
-     x="621.52191"
-     y="190.18716" />
-  <text
-     xml:space="preserve"
-     style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#1f0000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-     x="623.10168"
-     y="196.50618"
-     id="text3158-6-81-6"
-     sodipodi:linespacing="125%"><tspan
-       sodipodi:role="line"
-       id="tspan3160-42-4-7"
-       x="623.10168"
-       y="196.50618"
-       style="fill:#1f0000;fill-opacity:1">eth1</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
@@ -1837,7 +1661,7 @@
        id="tspan5063">192.168.3.1/32</tspan></text>
   <g
      class="node"
-     transform="matrix(0.56420567,0,0,0.68144869,534.48359,5.4770116)"
+     transform="matrix(0.56420567,0,0,0.68144869,555.0204,155.0271)"
      id="g54-0-4">
     <rect
        style="fill:none;stroke:#000000;stroke-width:2"
@@ -1899,22 +1723,22 @@
          id="flowPara5135" /></flowRoot>  </g>
   <line
      class="link"
-     x1="612.55005"
-     x2="546.4632"
-     y1="107.60742"
-     y2="57.758759"
+     x1="597.33368"
+     x2="566.94537"
+     y1="286.70087"
+     y2="207.25426"
      data-length="113.53413583587978"
      id="line32-1"
-     style="stroke:#000000;stroke-width:0.75870401" />
+     style="stroke:#000000;stroke-width:0.64949965" />
   <line
      class="link"
-     x1="457.48026"
-     x2="525.17151"
-     y1="110.98537"
-     y2="57.487381"
+     x1="483.86938"
+     x2="545.64844"
+     y1="284.69846"
+     y2="207.09737"
      data-length="113.53413583587978"
      id="line32-1-9"
-     style="stroke:#000000;stroke-width:0.79546863" />
+     style="stroke:#000000;stroke-width:0.91525596" />
   <rect
      style="fill:#eafff3;fill-opacity:1;stroke:none"
      id="rect3940-03-04-95-4-8"
@@ -1936,79 +1760,60 @@
        style="fill:#1f0000;fill-opacity:1">swp4</tspan></text>
   <rect
      style="fill:#eafff3;fill-opacity:1;stroke:none"
-     id="rect3940-03-04-95-4-0"
-     width="16.324129"
-     height="9.4785271"
-     x="461.81488"
-     y="95.84771" />
-  <text
-     xml:space="preserve"
-     style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#1f0000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-     x="463.39462"
-     y="102.43002"
-     id="text3158-6-64-0-0-4"
-     sodipodi:linespacing="125%"><tspan
-       sodipodi:role="line"
-       id="tspan3160-42-5-7-9-3"
-       x="463.39462"
-       y="102.43002"
-       style="fill:#1f0000;fill-opacity:1">eth2</tspan></text>
-  <rect
-     style="fill:#eafff3;fill-opacity:1;stroke:none"
      id="rect3940-03-04-95-4-9"
      width="16.324129"
      height="9.4785271"
-     x="595.83075"
-     y="96.374283" />
+     x="616.36755"
+     y="245.92438" />
   <text
      xml:space="preserve"
      style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#1f0000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-     x="597.41046"
-     y="102.6933"
+     x="617.94727"
+     y="252.24339"
      id="text3158-6-64-0-0-41"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3160-42-5-7-9-7"
-       x="597.41046"
-       y="102.6933"
+       x="617.94727"
+       y="252.24339"
        style="fill:#1f0000;fill-opacity:1">eth2</tspan></text>
   <rect
      style="fill:#eafff3;fill-opacity:1;stroke:none"
      id="rect3940-03-04-95-4-82"
      width="16.324129"
      height="9.4785271"
-     x="504.73157"
-     y="63.199451" />
+     x="525.26837"
+     y="212.74954" />
   <text
      xml:space="preserve"
      style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#1f0000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-     x="507.62778"
-     y="69.255173"
+     x="528.16461"
+     y="218.80527"
      id="text3158-6-64-0-0-0"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3160-42-5-7-9-2"
-       x="507.62778"
-       y="69.255173"
+       x="528.16461"
+       y="218.80527"
        style="fill:#1f0000;fill-opacity:1">eth1</tspan></text>
   <rect
      style="fill:#eafff3;fill-opacity:1;stroke:none"
      id="rect3940-03-04-95-4-3"
      width="16.324129"
      height="9.4785271"
-     x="551.5976"
-     y="63.726028" />
+     x="572.1344"
+     y="213.27612" />
   <text
      xml:space="preserve"
      style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#1f0000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-     x="553.17737"
-     y="70.045052"
+     x="573.71417"
+     y="219.59514"
      id="text3158-6-64-0-0-6"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3160-42-5-7-9-66"
-       x="553.17737"
-       y="70.045052"
+       x="573.71417"
+       y="219.59514"
        style="fill:#1f0000;fill-opacity:1">eth2</tspan></text>
   <line
      class="link"
@@ -2049,30 +1854,14 @@
   <text
      xml:space="preserve"
      style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-     x="618.21057"
-     y="317.53992"
+     x="622.42328"
+     y="309.37784"
      id="text3349"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
-       id="tspan3351"
-       x="618.21057"
-       y="317.53992">Is leaf5 and leaf6 really needed?</tspan><tspan
-       sodipodi:role="line"
-       x="618.21057"
-       y="330.03992"
-       id="tspan3353">Or just attach external routeers directly</tspan><tspan
-       sodipodi:role="line"
-       x="618.21057"
-       y="342.53992"
-       id="tspan3355">to Network nodes? Maybe its better this</tspan><tspan
-       sodipodi:role="line"
-       x="618.21057"
-       y="355.03992"
-       id="tspan3663">way for inter-tenant routing to happen on</tspan><tspan
-       sodipodi:role="line"
-       x="618.21057"
-       y="367.53992"
-       id="tspan3665">high speed switches? </tspan></text>
+       x="622.42328"
+       y="309.37784"
+       id="tspan3665" /></text>
   <rect
      style="fill:#00ffff;fill-opacity:1;stroke:none"
      id="rect3940-03-04-95-4-30"
