@@ -40,13 +40,13 @@
      inkscape:window-height="1355"
      id="namedview173"
      showgrid="false"
-     inkscape:zoom="1.8990293"
-     inkscape:cx="616.57143"
-     inkscape:cy="373.0858"
+     inkscape:zoom="10.742532"
+     inkscape:cx="560.30541"
+     inkscape:cy="531.43677"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g54-0-4" />
+     inkscape:current-layer="svg2" />
   <line
      class="link"
      x1="204"
@@ -1673,11 +1673,10 @@
     <text
        style="font-size:12px;text-anchor:middle;fill:#000000"
        class="devicename"
-       y="0"
-       x="0"
+       y="28.42153"
+       x="-2.799962"
        font-size="12px"
-       id="text58-1-0"
-       transform="translate(0,45.421879)">TestExternalRtr</text>
+       id="text58-1-0">TestExternalRtr</text>
     <circle
        sodipodi:ry="2"
        sodipodi:rx="2"
@@ -1763,19 +1762,19 @@
      id="rect3940-03-04-95-4-9"
      width="16.324129"
      height="9.4785271"
-     x="616.36755"
-     y="245.92438" />
+     x="286.19888"
+     y="46.348736" />
   <text
      xml:space="preserve"
      style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#1f0000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-     x="617.94727"
-     y="252.24339"
+     x="287.77859"
+     y="52.667751"
      id="text3158-6-64-0-0-41"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3160-42-5-7-9-7"
-       x="617.94727"
-       y="252.24339"
+       x="287.77859"
+       y="52.667751"
        style="fill:#1f0000;fill-opacity:1">eth2</tspan></text>
   <rect
      style="fill:#eafff3;fill-opacity:1;stroke:none"
@@ -2030,7 +2029,7 @@
        sodipodi:role="line"
        id="tspan3565"
        x="491.17197"
-       y="343.21091">201.2.1.1/24</tspan></text>
+       y="343.21091">203.2.1.1/24</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:4px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
@@ -2041,7 +2040,7 @@
        sodipodi:role="line"
        id="tspan3565-0"
        x="587.50916"
-       y="344.23785">201.2.1.1/24</tspan></text>
+       y="344.23785">203.2.1.2/24</tspan></text>
   <flowRoot
      xml:space="preserve"
      id="flowRoot3613"
@@ -2257,4 +2256,26 @@
        id="tspan3565-2-9"
        x="530.90131"
        y="533.80841">201.2.1.2/24</tspan></text>
+  <path
+     sodipodi:type="arc"
+     style="fill:#00ffff;fill-opacity:1;stroke:#93a165;stroke-width:1.16900003;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     id="path4036"
+     sodipodi:cx="553.17737"
+     sodipodi:cy="185.89371"
+     sodipodi:rx="6.0557256"
+     sodipodi:ry="5.7924328"
+     d="m 559.23309,185.89371 a 6.0557256,5.7924328 0 1 1 -12.11145,0 6.0557256,5.7924328 0 1 1 12.11145,0 z"
+     transform="matrix(0.51939719,0,0,0.63391521,247.42813,65.683226)" />
+  <text
+     xml:space="preserve"
+     style="font-size:6.4546032px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
+     x="640.68774"
+     y="156.63945"
+     id="text4038"
+     sodipodi:linespacing="125%"
+     transform="scale(0.8435512,1.1854645)"><tspan
+       sodipodi:role="line"
+       id="tspan4040"
+       x="640.68774"
+       y="156.63945">203.3.1.1/32</tspan></text>
 </svg>
