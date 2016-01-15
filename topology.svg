@@ -40,13 +40,13 @@
      inkscape:window-height="1355"
      id="namedview173"
      showgrid="false"
-     inkscape:zoom="3.7980586"
+     inkscape:zoom="1.8990293"
      inkscape:cx="616.57143"
-     inkscape:cy="485.65118"
+     inkscape:cy="373.0858"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g54-0-4" />
   <line
      class="link"
      x1="204"
@@ -1677,7 +1677,7 @@
        x="0"
        font-size="12px"
        id="text58-1-0"
-       transform="translate(0,45.421879)">TestExternalVM</text>
+       transform="translate(0,45.421879)">TestExternalRtr</text>
     <circle
        sodipodi:ry="2"
        sodipodi:rx="2"
