@@ -3,8 +3,11 @@
 - hosts: all
   sudo: True
   tasks:
+    - name: create ssh key to be used for packstack install
+      user: name=root generate_ssh_key=yes
+
     - name: copy ssh key from root user into local directory
-      fetch:  src=/root/.ssh/id_rsa.pub dest=./deploy_key_id_server1_rsa.pub flat=yes
+      fetch:  src=/root/.ssh/id_rsa.pub dest=./deploy_key_id_rdo_installer_rsa.pub flat=yes
 
     - name: copy packstack answer file
       copy:

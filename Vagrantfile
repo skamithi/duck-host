@@ -290,7 +290,6 @@ Vagrant.configure("2") do |config|
         domain.memory = switch_memory
       end
 
-      p "DEBUG ME #{wbench_hosts[:wbench_hosts]}"
 
       # eth0 (after deleting vagrant interface)
       leaf4.vm.network :private_network,
@@ -436,6 +435,11 @@ Vagrant.configure("2") do |config|
         :libvirt__tunnel_type => 'udp',
         :libvirt__tunnel_port => '17016',
         :libvirt__tunnel_local_port => '18016'
+
+
+      server1.vm.provision :ansible do |ansible|
+        ansible.playbook = 'playbooks/rdo_installer.yml'
+      end
 
       server1.vm.provision :ansible do |ansible|
         ansible.playbook = 'playbooks/bootstrap_server.yml'

@@ -6,12 +6,18 @@
     - name: update yum to the latest
       yum: name=* state=latest update_cache=yes
 
-    - name: copy ssh key to root account
-      authorized_key: user=root key="{{ lookup('file', './deploy_key_id_rsa.pub') }}"
-
     - name: capture hostname into another variable
       debug: msg={{ inventory_hostname }}
       register: svr_hostname
+
+    - name: copy ssh key to root account
+      authorized_key: user=root key="{{ lookup('file', item ) }}"
+      with_items:
+        - './deploy_key_id_rdo_installer_rsa.pub'
+        - './deploy_key_id_rsa.pub'
+
+#    - name: create ssh key to be used for packstack install
+#      user: name=root generate_ssh_key=yes
 
 #    - name: install lldpad
 #      yum:  name=lldpad
@@ -52,8 +58,6 @@
 #      command: systemctl enable network
 #      when: networkm_stopped.changed == True
 
-#    - name: create ssh key to be used for packstack install
-#      user: name=root generate_ssh_key=yes
 
 #    - name: install rdo-release repo package
 #      yum: name=https://rdoproject.org/repos/rdo-release.rpm
@@ -61,34 +65,35 @@
 #    - name: install openstack-packstack
 #      yum: name=openstack-packstack
 
-  handlers:
-    - name: reboot server vm
-      command: reboot
+- hosts: all
+  connection: local
+  gather_facts: false
+  tasks:
+      - name: get directory name where ansible was executed. this matches prefix of VM
+        shell: "pwd | awk 'BEGIN { FS=\"/\" } {print $(NF-1)}'"
+        register: vm_prefix
 
-  - hosts: all
-    connection: local
-    gather_facts: false
-    tasks:
-        - name: get directory name where ansible was executed. this matches prefix of VM
-          shell: "pwd | awk 'BEGIN { FS=\"/\" } {print $(NF-1)}'"
-          register: vm_prefix
+      - name: shutdown vm
+        shell:  "virsh destroy {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}"
 
-        - name: wait for vm to come back online
-          local_action: wait_for port=22 host="{{ ansible_ssh_host }}" delay=10
-          when: eth_remap.changed == True
+      - name: bring back up vm
+        shell: "virsh start  {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}"
 
-        - name: check if hostname is copied
-          debug: msg="{{ svr_hostname.msg }}"
+      - name: wait for vm to come back online
+        local_action: wait_for port=22 host="{{ ansible_ssh_host }}" delay=10
 
-        - name: get the mac address of the first interface
-          shell: "virsh domiflist {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}  | awk '/vagrant-libvirt/ {print $5}'"
-          register: virsh_output
+      - name: check if hostname is copied
+        debug: msg="{{ svr_hostname.msg }}"
 
-        - name: remove first interface
-          shell: "virsh detach-interface --domain {{ vm_prefix.stdout_lines[0] }}_{{ svr_hostname.msg }} --type network --mac {{ virsh_output.stdout }} --config"
+      - name: shutdown server vm
+        shell: virsh destroy   {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}
 
-        - name: shutdown vm
-          shell:  "virsh destroy {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}"
+      - name: get the mac address of the first interface
+        shell: "virsh domiflist {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}  | awk '/vagrant-libvirt/ {print $5}'"
+        register: virsh_output
 
-        - name: bring back up vm
-          shell: "virsh start  {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}"
+      - name: remove first interface
+        shell: "virsh detach-interface --domain {{ vm_prefix.stdout_lines[0] }}_{{ svr_hostname.msg }} --type network --mac {{ virsh_output.stdout }} --config"
+
+      - name: bring back up vm
+        shell: "virsh start  {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}"
