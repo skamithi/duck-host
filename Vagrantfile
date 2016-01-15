@@ -62,7 +62,7 @@ Vagrant.configure("2") do |config|
     end
 
   config.vm.define "test_ext_rtr" do |test_ext_rtr|
-      test_ext_rtr.vm.hostname = "test_ext_rtr"
+      test_ext_rtr.vm.hostname = "test-ext-rtr"
       test_ext_rtr.vm.box = switch_box
 
       test_ext_rtr.vm.provider :libvirt do |domain|
@@ -321,7 +321,7 @@ Vagrant.configure("2") do |config|
 
 
   config.vm.define "ext_rtr1" do |ext_rtr1|
-      ext_rtr1.vm.hostname = "ext_rtr1"
+      ext_rtr1.vm.hostname = "ext-rtr1"
       ext_rtr1.vm.box = switch_box
 
       ext_rtr1.vm.provider :libvirt do |domain|
@@ -357,7 +357,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "ext_rtr2" do |ext_rtr2|
-      ext_rtr2.vm.hostname = "ext_rtr2"
+      ext_rtr2.vm.hostname = "ext-rtr2"
       ext_rtr2.vm.box = switch_box
 
       ext_rtr2.vm.provider :libvirt do |domain|
