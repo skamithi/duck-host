@@ -11,7 +11,7 @@ switch_memory = 512
 server_memory = 8192
 ext_rtr_memory = 256
 
-wbench_hostlist = [:test_ext_rtr, :spine1, :leaf1, :leaf2,
+wbench_hostlist = [:test_rtr, :spine1, :leaf1, :leaf2,
                   :leaf3, :leaf4, :ext_rtr1, :ext_rtr2,
                   :server1, :server2, :server3, :server4]
 last_ip_octet = 100
@@ -19,7 +19,7 @@ last_mac_octet = 11
 wbench_hosts = { :wbench_hosts => {} }
 
 wbench_hostlist.each do |hostentry|
-  wbench_hosts[:wbench_hosts][hostentry] = {
+  wbench_hosts[:wbench_hosts][hostentry.to_s.gsub('_','-')] = {
     :ip => '192.168.0.' + last_ip_octet.to_s,
     :mac => '12:11:22:33:44:' + last_mac_octet.to_s
   }
@@ -61,23 +61,37 @@ Vagrant.configure("2") do |config|
       end
     end
 
-  config.vm.define "test_ext_rtr" do |test_ext_rtr|
-      test_ext_rtr.vm.hostname = "test-ext-rtr"
-      test_ext_rtr.vm.box = switch_box
+  config.vm.define "test_rtr" do |test_rtr|
+      test_rtr.vm.hostname = "test-rtr"
+      test_rtr.vm.box = switch_box
 
-      test_ext_rtr.vm.provider :libvirt do |domain|
+      test_rtr.vm.provider :libvirt do |domain|
         domain.memory = switch_memory
       end
-      # ext_rtr1:swp49 -- test_ext_rtr:swp1
-      test_ext_rtr.vm.network :private_network,
+
+      # eth0 (after deleting vagrant interface)
+      test_rtr.vm.network :private_network,
+        :auto_config => false,
+        :libvirt__forward_mode => 'veryisolated',
+        :libvirt__dhcp_enabled => false,
+        :libvirt__network_name => 'switch_mgmt',
+        :mac => wbench_hosts[:wbench_hosts]["test-rtr"][:mac]
+
+
+      # ext_rtr1:swp49 -- test_rtr:swp1
+      test_rtr.vm.network :private_network,
         :libvirt__tunnel_type => 'udp',
         :libvirt__tunnel_port => '17010',
         :libvirt__tunnel_local_port => '18010'
-      # ext_rtr2:swp49 -- test_ext_rtr:swp2
-      test_ext_rtr.vm.network :private_network,
+      # ext_rtr2:swp49 -- test_rtr:swp2
+      test_rtr.vm.network :private_network,
         :libvirt__tunnel_type => 'udp',
         :libvirt__tunnel_port => '17015',
         :libvirt__tunnel_local_port => '18015'
+
+    test_rtr.vm.provision :ansible do |ansible|
+      ansible.playbook = 'playbooks/bootstrap_switch.yml'
+    end
 
   end
 
@@ -95,7 +109,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:spine1][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["spine1"][:mac]
 
       # spine1:swp1 -- leaf1:swp49
       spine1.vm.network :private_network,
@@ -138,7 +152,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:leaf1][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["leaf1"][:mac]
 
       # leaf1:swp1 -- leaf2:swp1
       leaf1.vm.network :private_network,
@@ -185,7 +199,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:leaf2][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["leaf2"][:mac]
 
       # leaf1:swp1 -- leaf2:swp1
       leaf2.vm.network :private_network,
@@ -234,7 +248,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:leaf3][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["leaf3"][:mac]
 
       # leaf3:swp1 -- leaf4:swp1
       leaf3.vm.network :private_network,
@@ -276,6 +290,7 @@ Vagrant.configure("2") do |config|
         domain.memory = switch_memory
       end
 
+      p "DEBUG ME #{wbench_hosts[:wbench_hosts]}"
 
       # eth0 (after deleting vagrant interface)
       leaf4.vm.network :private_network,
@@ -283,7 +298,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:leaf4][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["leaf4"][:mac]
 
 
       # leaf3:swp1 -- leaf4:swp1
@@ -333,7 +348,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:ext_rtr1][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["ext-rtr1"][:mac]
 
       # ext_rtr1:swp1 -- server3:eth3
       ext_rtr1.vm.network :private_network,
@@ -345,7 +360,7 @@ Vagrant.configure("2") do |config|
         :libvirt__tunnel_type => 'udp',
         :libvirt__tunnel_port => '18006',
         :libvirt__tunnel_local_port => '17006'
-      # ext_rtr1:swp49 -- test_ext_rtr:swp1
+      # ext_rtr1:swp49 -- test_rtr:swp1
       ext_rtr1.vm.network :private_network,
         :libvirt__tunnel_type => 'udp',
         :libvirt__tunnel_port => '18010',
@@ -370,7 +385,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:ext_rtr2][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["ext-rtr2"][:mac]
 
       # ext_rtr2:swp1 -- server3:eth4
       ext_rtr2.vm.network :private_network,
@@ -382,7 +397,7 @@ Vagrant.configure("2") do |config|
         :libvirt__tunnel_type => 'udp',
         :libvirt__tunnel_port => '18014',
         :libvirt__tunnel_local_port => '17014'
-      # ext_rtr2:swp49 -- test_ext_rtr:swp2
+      # ext_rtr2:swp49 -- test_rtr:swp2
       ext_rtr2.vm.network :private_network,
         :libvirt__tunnel_type => 'udp',
         :libvirt__tunnel_port => '18015',
@@ -409,7 +424,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:server1][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["server1"][:mac]
 
       # leaf1:swp3 -- server1:eth1
       server1.vm.network :private_network,
@@ -445,7 +460,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:server2][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["server2"][:mac]
 
       # leaf1:swp4 -- server2:eth1
       server2.vm.network :private_network,
@@ -477,7 +492,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:server3][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["server3"][:mac]
 
       # leaf3:swp3 -- server3:eth1
       server3.vm.network :private_network,
@@ -521,7 +536,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:server4][:mac]
+        :mac => wbench_hosts[:wbench_hosts]["server4"][:mac]
 
       # leaf3:swp4 -- server4:eth1
       server4.vm.network :private_network,
