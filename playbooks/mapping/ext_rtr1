@@ -5,6 +5,7 @@ REMAP_METHOD="mapped"
 
 # Map of ethN names to new names. The new name can be anything you like, as
 # long as the kernel accepts it.
-MAP="eth1=swp49
-     eth2=swp50
+MAP="eth1=swp1
+     eth2=swp2
+     eth3=swp49
 "

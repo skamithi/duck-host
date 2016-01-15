@@ -544,8 +544,6 @@ Vagrant.configure("2") do |config|
         :libvirt__tunnel_port => '17014',
         :libvirt__tunnel_local_port => '18014'
 
-
-
     end
 
 end
