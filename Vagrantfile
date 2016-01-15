@@ -12,7 +12,7 @@ server_memory = 8192
 ext_rtr_memory = 256
 
 wbench_hostlist = [:test_ext_rtr, :spine1, :leaf1, :leaf2,
-                  :leaf3, :leaf4, :ext_rtr1, :extr_rtr2,
+                  :leaf3, :leaf4, :ext_rtr1, :ext_rtr2,
                   :server1, :server2, :server3, :server4]
 last_ip_octet = 100
 last_mac_octet = 11
@@ -81,11 +81,11 @@ Vagrant.configure("2") do |config|
 
   end
 
-    config.vm.define "spine1" do |leaf1|
-      leaf1.vm.hostname = "spine1"
-      leaf1.vm.box = switch_box
+    config.vm.define "spine1" do |spine1|
+      spine1.vm.hostname = "spine1"
+      spine1.vm.box = switch_box
 
-      leaf1.vm.provider :libvirt do |domain|
+      spine1.vm.provider :libvirt do |domain|
         domain.memory = switch_memory
       end
 
@@ -95,7 +95,7 @@ Vagrant.configure("2") do |config|
         :libvirt__forward_mode => 'veryisolated',
         :libvirt__dhcp_enabled => false,
         :libvirt__network_name => 'switch_mgmt',
-        :mac => wbench_hosts[:wbench_hosts][:leaf1][:mac]
+        :mac => wbench_hosts[:wbench_hosts][:spine1][:mac]
 
       # spine1:swp1 -- leaf1:swp49
       spine1.vm.network :private_network,
@@ -118,7 +118,7 @@ Vagrant.configure("2") do |config|
         :libvirt__tunnel_port => '18019',
         :libvirt__tunnel_local_port => '17019'
 
-      spine1.provision :ansible do |ansible|
+      spine1.vm.provision :ansible do |ansible|
         ansible.playbook = 'playbooks/bootstrap_switch.yml'
       end
 
