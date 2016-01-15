@@ -38,8 +38,8 @@
     - name: add fake cl-license
       copy: src=switch/cl-license dest=/usr/cumulus/bin/cl-license mode=755 owner=root
 
-    - name: add debian repository
-      apt_repository: repo="deb [arch=amd64] http://http.debian.net/debian wheezy  main contrib non-free" update_cache=yes
+#    - name: add debian repository
+#      apt_repository: repo="deb [arch=amd64] http://http.debian.net/debian wheezy  main contrib non-free" update_cache=yes
 
 
   handlers:
@@ -74,5 +74,3 @@
 
       - name: bring back up vm
         shell: "virsh start  {{ vm_prefix.stdout_lines[0]}}_{{ sw_hostname.msg }}"
-
-

@@ -1,0 +1,94 @@
+# vim:ft=ansible:
+---
+- hosts: all
+  sudo: True
+  tasks:
+    - name: update yum to the latest
+      yum: name=* state=latest update_cache=yes
+
+    - name: copy ssh key to root account
+      authorized_key: user=root key="{{ lookup('file', './deploy_key_id_rsa.pub') }}"
+
+    - name: capture hostname into another variable
+      debug: msg={{ inventory_hostname }}
+      register: svr_hostname
+
+#    - name: install lldpad
+#      yum:  name=lldpad
+
+#    - name: enable lldpad service
+#      service: name=lldpad.service enabled=yes state=started
+#      register: lldpad_started
+
+#    - name: enable lldpad on all interfaces. One time when first configured.
+#      command: lldptool set-lldp -i {{ item }} adminStatus=rxtx
+#      with_items: ansible_interfaces
+#      when: lldpad_started.changed == True
+#      ignore_errors: true
+
+#    - name: enable sending system name via lldpad. One time.
+#      command: lldptool -T -i {{ item }} -V sysName enableTx=yes
+#      with_items: ansible_interfaces
+#      when: lldpad_started.changed == True
+#      ignore_errors: true
+
+#    - name: enable sending port description via lldpad. One time.
+#      command: lldptool -T -i {{ item }} -V portDesc enableTx=yes
+#      with_items: ansible_interfaces
+#      when: lldpad_started.changed == True
+#      ignore_errors: true
+
+#    - name: stop NetworkManager
+#      service: name=NetworkManager enabled=no state=stopped
+#      register: networkm_stopped
+
+#    - name: install network interface config file
+#      copy: src=server_files/ifcfg-{{item}} dest=/etc/sysconfig/network-scripts/ifcfg-{{item}}
+#      with_items: ansible_interfaces
+#      ignore_errors: true
+#      when: networkm_stopped.changed == True
+
+#    - name: start regular network service
+#      command: systemctl enable network
+#      when: networkm_stopped.changed == True
+
+#    - name: create ssh key to be used for packstack install
+#      user: name=root generate_ssh_key=yes
+
+#    - name: install rdo-release repo package
+#      yum: name=https://rdoproject.org/repos/rdo-release.rpm
+
+#    - name: install openstack-packstack
+#      yum: name=openstack-packstack
+
+  handlers:
+    - name: reboot server vm
+      command: reboot
+
+  - hosts: all
+    connection: local
+    gather_facts: false
+    tasks:
+        - name: get directory name where ansible was executed. this matches prefix of VM
+          shell: "pwd | awk 'BEGIN { FS=\"/\" } {print $(NF-1)}'"
+          register: vm_prefix
+
+        - name: wait for vm to come back online
+          local_action: wait_for port=22 host="{{ ansible_ssh_host }}" delay=10
+          when: eth_remap.changed == True
+
+        - name: check if hostname is copied
+          debug: msg="{{ svr_hostname.msg }}"
+
+        - name: get the mac address of the first interface
+          shell: "virsh domiflist {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}  | awk '/vagrant-libvirt/ {print $5}'"
+          register: virsh_output
+
+        - name: remove first interface
+          shell: "virsh detach-interface --domain {{ vm_prefix.stdout_lines[0] }}_{{ svr_hostname.msg }} --type network --mac {{ virsh_output.stdout }} --config"
+
+        - name: shutdown vm
+          shell:  "virsh destroy {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}"
+
+        - name: bring back up vm
+          shell: "virsh start  {{ vm_prefix.stdout_lines[0]}}_{{ svr_hostname.msg }}"
