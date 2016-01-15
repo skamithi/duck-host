@@ -8,7 +8,7 @@ ext_rtr_box = 'trusty64'
 
 wbenchvm_memory = 4096
 switch_memory = 512
-server_memory = 4096
+server_memory = 8192
 ext_rtr_memory = 256
 
 wbench_hostlist = [:ext_rtr, :spine1, :leaf1, :leaf2,
@@ -360,124 +360,128 @@ Vagrant.configure("2") do |config|
 
 
     config.vm.define "server1" do |server1|
-        server1.vm.hostname = "server1"
-        server1.vm.box = server_box
+      server1.vm.hostname = "server1"
+      server1.vm.box = server_box
 
 
-        server1.vm.provider :libvirt do |domain|
-          domain.memory = server_memory
-        end
+      server1.vm.provider :libvirt do |domain|
+        domain.memory = server_memory
+      end
 
-       # eth0 (after deleting vagrant interface)
-        server1.vm.network :private_network,
-          :auto_config => false,
-          :libvirt__forward_mode => 'veryisolated',
-          :libvirt__dhcp_enabled => false,
-          :libvirt__network_name => 'switch_mgmt',
-          :mac => wbench_hosts[:wbench_hosts][:server1][:mac]
+      # eth0 (after deleting vagrant interface)
+      server1.vm.network :private_network,
+        :auto_config => false,
+        :libvirt__forward_mode => 'veryisolated',
+        :libvirt__dhcp_enabled => false,
+        :libvirt__network_name => 'switch_mgmt',
+        :mac => wbench_hosts[:wbench_hosts][:server1][:mac]
 
 
-        # leaf1:swp1 -- server1:eth1
-        server1.vm.network :private_network,
-          :libvirt__tunnel_type => 'udp',
-          :libvirt__tunnel_port => '17005',
-          :libvirt__tunnel_local_port => '18005'
-        # leaf2:swp1 -- server1:eth2
-        server1.vm.network :private_network,
-          :libvirt__tunnel_type => 'udp',
-          :libvirt__tunnel_port => '17015',
-          :libvirt__tunnel_local_port => '18015'
-
+      # leaf1:swp1 -- server1:eth1
+      server1.vm.network :private_network,
+        :libvirt__tunnel_type => 'udp',
+        :libvirt__tunnel_port => '17005',
+        :libvirt__tunnel_local_port => '18005'
+      # leaf2:swp1 -- server1:eth2
+      server1.vm.network :private_network,
+        :libvirt__tunnel_type => 'udp',
+        :libvirt__tunnel_port => '17015',
+        :libvirt__tunnel_local_port => '18015'
+      server1.vm.provision :ansible do |ansible|
+        ansible.playbook = 'playbooks/server_setup.yml'
+      end
+      server1.vm.provision :ansible do |ansible|
+        ansible.playbook = 'playbooks/server1.yml'
+      end
     end
 
     config.vm.define "server2" do |server2|
-        server2.vm.hostname = "server2"
-        server2.vm.box = server_box
+      server2.vm.hostname = "server2"
+      server2.vm.box = server_box
 
-        server2.vm.provider :libvirt do |domain|
-          domain.memory = server_memory
-        end
+      server2.vm.provider :libvirt do |domain|
+        domain.memory = server_memory
+      end
 
-        # eth0 (after deleting vagrant interface)
-        server2.vm.network :private_network,
-          :auto_config => false,
-          :libvirt__forward_mode => 'veryisolated',
-          :libvirt__dhcp_enabled => false,
-          :libvirt__network_name => 'switch_mgmt',
-          :mac => wbench_hosts[:wbench_hosts][:server2][:mac]
+      # eth0 (after deleting vagrant interface)
+      server2.vm.network :private_network,
+        :auto_config => false,
+        :libvirt__forward_mode => 'veryisolated',
+        :libvirt__dhcp_enabled => false,
+        :libvirt__network_name => 'switch_mgmt',
+        :mac => wbench_hosts[:wbench_hosts][:server2][:mac]
 
 
-        # leaf1:swp2 -- server2:eth1
-        server2.vm.network :private_network,
-          :libvirt__tunnel_type => 'udp',
-          :libvirt__tunnel_port => '17012',
-          :libvirt__tunnel_local_port => '18012'
-        # leaf2:swp2 -- server2:eth2
-        server2.vm.network :private_network,
-          :libvirt__tunnel_type => 'udp',
-          :libvirt__tunnel_port => '17002',
-          :libvirt__tunnel_local_port => '18002'
-
+      # leaf1:swp2 -- server2:eth1
+      server2.vm.network :private_network,
+        :libvirt__tunnel_type => 'udp',
+        :libvirt__tunnel_port => '17012',
+        :libvirt__tunnel_local_port => '18012'
+      # leaf2:swp2 -- server2:eth2
+      server2.vm.network :private_network,
+        :libvirt__tunnel_type => 'udp',
+        :libvirt__tunnel_port => '17002',
+        :libvirt__tunnel_local_port => '18002'
     end
 
     config.vm.define "server3" do |server3|
-        server3.vm.hostname = "server3"
-        server3.vm.box = server_box
+      server3.vm.hostname = "server3"
+      server3.vm.box = server_box
 
-        server3.vm.provider :libvirt do |domain|
-          domain.memory = server_memory
-        end
+      server3.vm.provider :libvirt do |domain|
+        domain.memory = server_memory
+      end
 
-        # eth0 (after deleting vagrant interface)
-        server3.vm.network :private_network,
-          :auto_config => false,
-          :libvirt__forward_mode => 'veryisolated',
-          :libvirt__dhcp_enabled => false,
-          :libvirt__network_name => 'switch_mgmt',
-          :mac => wbench_hosts[:wbench_hosts][:server3][:mac]
+      # eth0 (after deleting vagrant interface)
+      server3.vm.network :private_network,
+        :auto_config => false,
+        :libvirt__forward_mode => 'veryisolated',
+        :libvirt__dhcp_enabled => false,
+        :libvirt__network_name => 'switch_mgmt',
+        :mac => wbench_hosts[:wbench_hosts][:server3][:mac]
 
 
-        # leaf3:swp1 -- server3:eth1
-        server3.vm.network :private_network,
-          :libvirt__tunnel_type => 'udp',
-          :libvirt__tunnel_port => '17010',
-          :libvirt__tunnel_local_port => '18010'
-        # leaf4:swp1 -- server3:eth2
-        server3.vm.network :private_network,
-          :libvirt__tunnel_type => 'udp',
-          :libvirt__tunnel_port => '17013',
-          :libvirt__tunnel_local_port => '18013'
+      # leaf3:swp1 -- server3:eth1
+      server3.vm.network :private_network,
+        :libvirt__tunnel_type => 'udp',
+        :libvirt__tunnel_port => '17010',
+        :libvirt__tunnel_local_port => '18010'
+      # leaf4:swp1 -- server3:eth2
+      server3.vm.network :private_network,
+        :libvirt__tunnel_type => 'udp',
+        :libvirt__tunnel_port => '17013',
+        :libvirt__tunnel_local_port => '18013'
 
     end
 
     config.vm.define "server4" do |server4|
-        server4.vm.hostname = "server4"
-        server4.vm.box = server_box
+      server4.vm.hostname = "server4"
+      server4.vm.box = server_box
 
 
-        server4.vm.provider :libvirt do |domain|
-          domain.memory = server_memory
-        end
+      server4.vm.provider :libvirt do |domain|
+        domain.memory = server_memory
+      end
 
-        # eth0 (after deleting vagrant interface)
-        server4.vm.network :private_network,
-          :auto_config => false,
-          :libvirt__forward_mode => 'veryisolated',
-          :libvirt__dhcp_enabled => false,
-          :libvirt__network_name => 'switch_mgmt',
-          :mac => wbench_hosts[:wbench_hosts][:server4][:mac]
+      # eth0 (after deleting vagrant interface)
+      server4.vm.network :private_network,
+        :auto_config => false,
+        :libvirt__forward_mode => 'veryisolated',
+        :libvirt__dhcp_enabled => false,
+        :libvirt__network_name => 'switch_mgmt',
+        :mac => wbench_hosts[:wbench_hosts][:server4][:mac]
 
 
-        # leaf3:swp2 -- server4:eth1
-        server4.vm.network :private_network,
-          :libvirt__tunnel_type => 'udp',
-          :libvirt__tunnel_port => '17000',
-          :libvirt__tunnel_local_port => '18000'
-        # leaf4:swp2 -- server4:eth2
-        server4.vm.network :private_network,
-          :libvirt__tunnel_type => 'udp',
-          :libvirt__tunnel_port => '17001',
-          :libvirt__tunnel_local_port => '18001'
+      # leaf3:swp2 -- server4:eth1
+      server4.vm.network :private_network,
+        :libvirt__tunnel_type => 'udp',
+        :libvirt__tunnel_port => '17000',
+        :libvirt__tunnel_local_port => '18000'
+      # leaf4:swp2 -- server4:eth2
+      server4.vm.network :private_network,
+        :libvirt__tunnel_type => 'udp',
+        :libvirt__tunnel_port => '17001',
+        :libvirt__tunnel_local_port => '18001'
 
     end
 

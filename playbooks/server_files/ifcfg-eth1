@@ -1,0 +1,7 @@
+NAME=eth1
+DEVICE=eth1
+ONBOOT=yes
+NETBOOT=yes
+IPV6INIT=yes
+BOOTPROTO=none
+TYPE=Ethernet

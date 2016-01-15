@@ -1,0 +1,14 @@
+# vim:ft=ansible:
+---
+- hosts: all
+  sudo: True
+  tasks:
+    - name: copy ssh key from root user into local directory
+      fetch:  src=/root/.ssh/id_rsa.pub dest=./deploy_key_id_server1_rsa.pub flat=yes
+
+    - name: copy packstack answer file
+      copy:
+        src: server_files/packstack-answer.txt
+        dest: /home/vagrant/packstack-answer.txt
+
+
